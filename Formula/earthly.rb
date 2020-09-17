@@ -25,6 +25,15 @@ class Earthly < Formula
         *std_go_args,
         "-o", bin/"earth",
         "./cmd/earth/main.go"
+
+    (bash_completion/"earth").write "complete -o nospace -C '#{bin}/earth' earth\n"
+    (zsh_completion/"_earth").write "#compdef _earth earth\n" \
+    "\n" \
+    "function _earth {\n" \
+    "    autoload -Uz bashcompinit\n" \
+    "    bashcompinit\n" \
+    "    complete -o nospace -C '#{bin}/earth' earth\n" \
+    "}\n"
   end
 
   test do
