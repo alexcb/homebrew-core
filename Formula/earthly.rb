@@ -25,8 +25,12 @@ class Earthly < Formula
         *std_go_args,
         "-o", bin/"earth",
         "./cmd/earth/main.go"
-    (bash_completion/"earth").write `#{bin}/earth bootstrap --source bash`
-    (zsh_completion/"_earth").write `#{bin}/earth bootstrap --source zsh`
+
+    bash_output = Utils.safe_popen_read("#{bin}/earth", "bootstrap", "--source", "bash")
+    (bash_completion/"earth").write bash_output
+
+    zsh_output = Utils.safe_popen_read("#{bin}/earth", "bootstrap", "--source", "zsh")
+    (zsh_completion/"_earth").write zsh_output
   end
 
   test do
