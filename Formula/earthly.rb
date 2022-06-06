@@ -44,7 +44,7 @@ class Earthly < Formula
       mytesttarget:
       \tRUN echo Homebrew
     EOS
-    output = shell_output("#{bin}/earthly ls").strip
+    output = shell_output("#{bin}/earthly ls")
     assert_match "+mytesttarget", output
   end
 end
